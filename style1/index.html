@@ -2,111 +2,57 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+	<link rel="stylesheet" href="index.css">
 	<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
 	<script src="touch.js"></script>
+	<script src="index.js"></script>
 	<title>Document</title>
-	<style>
-		body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
-		dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
-		pre, /* text formatting elements 文本格式元素 */
-		fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
-		th, td { /* table elements 表格元素 */
-		    margin: 0;
-		    padding: 0;
-		}
-		html, body {
-			height: 100%;
-		}
-		ul {
-			list-style: none;
-		}
-		.content {
-			height: 100%;
-			line-height: 400px;
-			font-size: 70px;
-			overflow: hidden;
-		}
-		.content ul {
-			height: 100%;
-			width: 400%;
-
-		}
-		.page {
-			height: 100%;
-			text-align: center;
-			float: left;
-			width: 25%;
-		}
-		.animate {
-			-webkit-transition: all .5s;
-		}
-	</style>
 </head>
 <body>
 	<div class="content">
 		<ul>
-			<li class="page">page 1</li>
-			<li class="page">page 2</li>
+			<li class="page">
+				<div class="cover-picture-content">
+					<div>
+						<div class="cover-picture-up-border"></div>
+						<div class="cover-picture-right-border"></div>
+						<div class="cover-picture-down-border"></div>
+						<div class="cover-picture-left-border"></div>
+						<div class="cover-picture-header-decorate">
+						<span>THE WEDDING</span>
+						</div>
+						<div class="cover-picture-header-name">
+							<div>
+								<div>汉克放</div>
+								<div>&amp;</div>
+								<div>卡 罗</div>
+							</div>
+						</div>
+						<div class="cover-picture-picture">
+							<div></div>
+						</div>
+						<div class="cover-picture-footer">
+						<span>2014年12月27日</span>
+						</div>
+					</div>
+				</div>
+				<div class="cover-footer">
+
+				</div>
+			</li>
+			<li class="page"><img src="http://cestf.img47.wal8.com/img47/539947_20160316113107/145809911173.jpg"></li>
 			<li class="page">page 3</li>
 			<li class="page">page 4</li>
 		</ul>
 	</div>
-
-	<script>
-		$(function() {
-			$('#d1').css('width', '100%');
-			var originX, endX, 
-				$ul = $('ul'),
-				marginLeftX,
-				maxX = $ul.width() * 0.75,
-				eachliX = $ul.width() * 0.25,
-				lock = false;
-			$('body').on('touchstart', function(e) {
-				if(lock) return;
-				marginLeftX = Number.parseInt($ul.css('margin-left'));
-				originX = e.touches[0].pageX;
-			});
-			$('body').on('touchmove', function(e) {
-				if(lock) return;
-				endX = e.touches[0].pageX;
-				var moveX = endX - originX,
-				newMarginLeftX = marginLeftX + moveX;
-				if(newMarginLeftX >= 0) {
-					newMarginLeftX = 0;
-				} 
-				if(-newMarginLeftX >= maxX) {
-					newMarginLeftX = -maxX;
-				}
-				$ul.css('margin-left', newMarginLeftX + 'px');
-				timeI = null;
-			});
-			$('body').on('touchend', function(e) {
-				marginLeft = Number.parseInt($ul.css('margin-left'));
-				if(marginLeft == marginLeftX) return;
-				var _surX = (-marginLeft) % eachliX,
-					_pageIndex = Math.floor(-marginLeft/eachliX),
-					_newMarginLeft,
-					_silderLeft = -marginLeft > -marginLeftX;
-				if(_surX > eachliX*0.2 && _silderLeft) {
-					_pageIndex++;
-				} else if (_silderLeft) {
-					
-				} else if (!_silderLeft && _surX < eachliX*0.8) {
-
-				} else {
-					_pageIndex++;
-				}
-				_newMarginLeft = -(_pageIndex * eachliX);
-				$ul.css('margin-left', _newMarginLeft + 'px');
-				$ul.addClass('animate');
-				lock = true;
-				$ul[0].addEventListener('webkitTransitionEnd',function(){
-					$ul.removeClass('animate');
-					$ul[0].removeEventListener('webkitTransitionEnd');
-					lock = false;
-				}, false);
-			});
-		});
-	</script>
+	
+	<div class="upArrow">
+		<div></div>
+	</div>
+	<div class="downArrow">
+		<div></div>
+	</div>
+	<div id="musicCtrl">&#9834;</audio></div>
 </body>
 </html>
