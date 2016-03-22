@@ -4,8 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
 	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
 	<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
-	<script src="touch.js"></script>
+	<script src="lib/touch.js"></script>
+	<script src="lib/touchdiv.js"></script>
 	<script src="index.js"></script>
 	<title>Document</title>
 </head>
@@ -41,9 +43,50 @@
 
 				</div>
 			</li>
-			<li class="page"><img src="http://cestf.img47.wal8.com/img47/539947_20160316113107/145809911173.jpg"></li>
+			<li class="page">
+				<div id="pic_page" class="clearfix scrolldiv">
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+					<canvas mustPropagation="true"></canvas>
+				</div>
+			</li>
 			<li class="page">page 3</li>
-			<li class="page">page 4</li>
+			<li class="page">
+				<div id="comments_page" class="scrolldiv">
+					page 1<br>page 2<br>page 3<br>page 4<br>page 5<br>page 6<br>page 7<br>page 8<br>page 9<br>page 10<br>page 11<br>page 12<br>page 13<br>page 14<br>page 15<br>page 16<br>page 17<br>page 18<br>
+				</div>
+			</li>
 		</ul>
 	</div>
 	
@@ -52,6 +95,9 @@
 	</div>
 	<div class="downArrow">
 		<div></div>
+	</div>
+	<div id="pictureCorridor">
+		<img>
 	</div>
 	<div id="musicCtrl">&#9834;</audio></div>
 </body>

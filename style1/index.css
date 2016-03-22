@@ -28,11 +28,10 @@ ul {
 	height: 100%;
 	width: 100%;
 	text-align: center;
-	float: left;
-	width: 100%;
 }
 .page:nth-child(2) {
-	background-color: blue;
+	background-color: black;
+	overflow: hidden;
 }
 .page:nth-child(3) {
 	background-color: gray;
@@ -397,4 +396,36 @@ ul {
 	margin-top: -8px;
 	background-image: url(resource/date_right.png);
 	background-position: -2px -5px;
+}
+.page:nth-child(2) canvas {
+	display: block;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	box-sizing: border-box;
+	width: 25%;
+	float: left;
+}
+.clearfix:after {
+  content:'';
+  display: table;
+  clear: both;
+}
+.clearfix {
+  *zoom: 1; 
+}
+#pictureCorridor {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: black;
+}
+#pictureCorridor img {
+	display: block;
+}
+#comments_page, #pic_page, .scrolldiv {
+	height: 100%;
+	overflow: hidden;
+	position: relative;
 }

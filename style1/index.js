@@ -5,16 +5,23 @@ $(function() {
 		isAnimating = false,
 		$ul = $('.content > ul'),
 		ulHeight = $ul.height(),
+		ulWidth = $ul.width(),
+		$canvasList = $('.page:nth-child(2)').find('canvas'),
 		$downArrow = $('.downArrow'),
 		$upArrow = $('.upArrow'),
 		$musicCtrl = $('#musicCtrl'),
-		Media = new Audio("./12.mp3");
+		Media = new Audio("./12.mp3"),
+		$corridorImg = $('#pictureCorridor img'),
+		$pictureCorridor = $('#pictureCorridor'),
+		imgSrcList = {};
+	Media.loop = true;
 	$downArrow.show();
+	$pictureCorridor.hide();
 	$downArrow.tap(function() {
-		$('body').trigger('swipeUp');
+		$ul.trigger('swipeUp');
 	});
 	$upArrow.tap(function() {
-		$('body').trigger('swipeDown');
+		$ul.trigger('swipeDown');
 	});
 	$musicCtrl.tap(function() {
 		$musicCtrl.hasClass('stop') ? startMusic() : stopMusic();
@@ -25,7 +32,7 @@ $(function() {
 	document.addEventListener('touchmove',function(event){
 		event.preventDefault(); 
 	},false);
-	$('body').swipeUp(function() {
+	$ul.swipeUp(function() {
 		if(currentIndex < maxIndex) {
 			currentIndex++;
 			if(!showCurrentPage('fadeInUpBig')) {
@@ -33,7 +40,7 @@ $(function() {
 			}
 		}
 	});
-	$('body').swipeDown(function() {
+	$ul.swipeDown(function() {
 		if(currentIndex > 0) {
 			currentIndex--;
 			if(!showCurrentPage('fadeInDownBig')) {
@@ -41,6 +48,90 @@ $(function() {
 			}
 		}
 	});
+	loadPic();
+	/*$canvasList.on('touchstart', function() {
+		$pictureCorridor.show();
+		showPicture($canvasList.index(this), function() {
+			$corridorImg.animateCss('fadeIn');
+		});
+	});*/
+	(function() {
+		var deltaX = 0, deltaY = 0, firstX, firstY, lastX, lastY;
+		$('#pic_page').on('touchend pointerup', 'canvas', function(e) {
+			if(deltaX <30 && deltaY < 30) {
+				$pictureCorridor.show();
+				showPicture($canvasList.index(this), function() {
+					$corridorImg.animateCss('fadeIn');
+				});
+			}
+			deltaX = deltaY = 0;
+		}).on('touchmove pointermove', 'canvas', function(e) {
+			lastX = e.touches[0].clientX;
+			lastY = e.touches[0].clientY;
+			deltaX += Math.abs(lastX - firstX);
+			deltaY += Math.abs(lastY - firstY);
+		}).on('touchstart pointerdown', 'canvas', function(e) {
+			firstX = e.touches[0].clientX;
+			firstY = e.touches[0].clientY;
+		});
+	})();
+		
+	$pictureCorridor.on('tap', function() {
+		$pictureCorridor.hide();
+	});
+	$pictureCorridor.on('swipeLeft', function() {
+		var index = $pictureCorridor.currentIndex;
+		if(index < $canvasList.length - 1) {
+			showPicture(++index, function() {
+				$corridorImg.animateCss('bounceInRight');
+			});
+		}
+	});
+	$pictureCorridor.on('swipeRight', function() {
+		var index = $pictureCorridor.currentIndex;
+		if(index > 0) {
+			showPicture(--index, function() {
+				$corridorImg.animateCss('bounceInLeft');
+			});
+		}
+	});
+	var scrolldivs = $('.scrolldiv')
+	scrolldivs.each(function() {
+		addScroll(this);
+	});
+	scrolldivs.on('scrollDivToTop', function() {
+		$upArrow.show();
+	}).on('scrollDivTouchMove', function() {
+		$upArrow.hide();
+	}).on('scrollDivTopToTop', function() {
+		$ul.trigger('swipeDown');
+	});
+
+	function showPicture(index, callback) {
+		var srcStr = imgSrcList[index],
+			lastIndex = $pictureCorridor.currentIndex,
+			lastSrcStr = imgSrcList[lastIndex];
+			
+		$pictureCorridor.currentIndex = index;
+		if(srcStr && lastSrcStr != srcStr) {
+			$corridorImg.attr('src', srcStr);
+			$corridorImg.css('width', 0).css('height', 0);
+			$corridorImg[0].onload = function() {
+				$corridorImg.css('height', 'auto').css('width', 'auto');
+				$corridorImg.css('padding-left','0px').css('padding-top','0px');
+				if(ulHeight/ulWidth < this.height/this.width) {
+					var paddingLeft = Math.floor((ulWidth - ulHeight * this.width / this.height) / 2);
+					$corridorImg.css('height', ulHeight).css('padding-left', paddingLeft + 'px');
+				} else {
+					var paddingTop = Math.floor((ulHeight - ulWidth * this.height / this.width) / 2);
+					$corridorImg.css('width', ulWidth).css('padding-top', paddingTop + 'px');
+				}
+				callback&&callback();
+			}
+		} else if(lastSrcStr == srcStr) {
+			callback&&callback();
+		}
+	}
 	function stopMusic() {
 		$musicCtrl.addClass('stop');
 		Media.pause();
@@ -73,6 +164,29 @@ $(function() {
 		}
 		return false;
 	}
+	function loadPic() {
+		var width = $canvasList.width(),
+			canvasWidth = Math.floor(ulWidth / 4) - 1,
+			rowNum = Math.floor(ulHeight / canvasWidth),
+			canvasHeight = canvasWidth;
+		$canvasList.each(function(i) {
+			this.width = canvasWidth;
+			this.height = canvasHeight;
+			var img = new Image(),
+				self = this;
+			img.src = Math.floor((Math.random() * 100)) % 2 == 0 ? "http://cestf.img47.wal8.com/img47/539947_20160316113107/145811187272.jpg" : "http://cestf.img47.wal8.com/img47/539947_20160316113107/145811197208.jpg";
+			img.onload = function() {
+				var ctx = self.getContext('2d'),
+					canvas = document.createElement('canvas'),
+					ctx1 = canvas.getContext('2d');
+				imgSrcList[i] = img.src;
+
+				ctx.drawImage(img,0,0,self.width,self.height);
+			}
+
+		});
+	}
+
 
 	//微信浏览器不支持calc，在JS里面解决
 	var $picture = $('.cover-picture-picture'),
@@ -80,4 +194,12 @@ $(function() {
 		pictureParentHeight = $picture.parent().height();
 	$picture.height(pictureParentHeight - 145);
 	$picChild.height(pictureParentHeight - 145 - 10);
+
+	$.fn['animateCss']=function (animationName) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        $(this).addClass('animated ' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+        });
+    };
+
 });
