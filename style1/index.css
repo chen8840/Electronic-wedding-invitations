@@ -429,3 +429,44 @@ ul {
 	overflow: hidden;
 	position: relative;
 }
+.address-panel {
+	width: 90%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px 10px;
+    margin: 0px auto;
+}
+#bMap {
+	height: 50%;
+	border: 1px solid grey;
+}
+.cover-picture-content.cover-picture-content-v1 {
+	padding: 16px 14px;
+}
+.address-panel {
+	display:-webkit-box;
+	display:-moz-box;
+	display:-ms-flexbox;
+	display:-webkit-flex;
+	display:flex;
+	-webkit-flex-direction: column; 
+	flex-direction: column;
+	-webkit-box-orient:vertical;
+	-moz-box-orient:vertical;
+	-ms-box-orient:vertical;
+}
+.address-panel #bMap {
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	-ms-box-flex:1;
+	-webkit-flex:1;
+	-ms-flex:1;
+	flex:1;
+}
+.address-panel > div:last-child {
+	text-align: left;
+	font-size: 16px;
+    margin-top: 12px;
+    line-height: 1.7;
+    color: rgb(171,112,178);
+}

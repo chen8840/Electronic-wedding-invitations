@@ -16,7 +16,9 @@ function addScroll(div) {
 	var startY,endY,touchStartY,touchEndY;
 	var touchMoveEvent = document.createEvent('HTMLEvents'),
 		toTopEvent = document.createEvent('HTMLEvents'),
-		topToTopEvent = document.createEvent('HTMLEvents');
+		topToTopEvent = document.createEvent('HTMLEvents'),
+		bottomToBottomEvent = document.createEvent('HTMLEvents'),
+		toBottomEvent = document.createEvent('HTMLEvents');
 	
 	//Set up a scrollbar div's basic styles.
 	function setupStyle(elem) {
@@ -209,6 +211,10 @@ function addScroll(div) {
 			toTopEvent.initEvent('scrollDivToTop', false, false);
 			div.dispatchEvent(toTopEvent);
 		}
+		if(div.scrollTop + div.clientHeight >= div.scrollHeight) {
+			toBottomEvent.initEvent('scrollDivToBottom', false, false);
+			div.dispatchEvent(toBottomEvent);
+		}
 		
 	}
 	
@@ -308,6 +314,10 @@ function addScroll(div) {
 		if((endY == 0 && startY == 0) && touchEndY != undefined && (touchStartY < touchEndY)) {
 			topToTopEvent.initEvent('scrollDivTopToTop', false, false);
 			div.dispatchEvent(topToTopEvent);
+		}
+		if((endY >= div.scrollHeight - div.clientHeight && startY >= div.scrollHeight - div.clientHeight) && touchEndY != undefined && (touchStartY > touchEndY)) {
+			bottomToBottomEvent.initEvent('scrollDivBottomToBottom', false, false);
+			div.dispatchEvent(bottomToBottomEvent);
 		}
 		
 		function ease() {

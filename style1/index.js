@@ -23,7 +23,7 @@ $(function() {
 	$upArrow.tap(function() {
 		$ul.trigger('swipeDown');
 	});
-	$musicCtrl.tap(function() {
+	$musicCtrl.tap(function(e) {
 		$musicCtrl.hasClass('stop') ? startMusic() : stopMusic();
 	});
 	Media.addEventListener('canplay', function() {
@@ -49,12 +49,6 @@ $(function() {
 		}
 	});
 	loadPic();
-	/*$canvasList.on('touchstart', function() {
-		$pictureCorridor.show();
-		showPicture($canvasList.index(this), function() {
-			$corridorImg.animateCss('fadeIn');
-		});
-	});*/
 	(function() {
 		var deltaX = 0, deltaY = 0, firstX, firstY, lastX, lastY;
 		$('#pic_page').on('touchend pointerup', 'canvas', function(e) {
@@ -100,12 +94,33 @@ $(function() {
 		addScroll(this);
 	});
 	scrolldivs.on('scrollDivToTop', function() {
-		$upArrow.show();
+		if(currentIndex > 1) {
+			$upArrow.show();
+		}
 	}).on('scrollDivTouchMove', function() {
 		$upArrow.hide();
+		$downArrow.hide();
 	}).on('scrollDivTopToTop', function() {
 		$ul.trigger('swipeDown');
+	}).on('scrollDivBottomToBottom', function() {
+		$ul.trigger('swipeUp');
+	}).on('scrollDivToBottom', function() {
+		if(currentIndex < maxIndex){
+			$downArrow.show();
+		}
 	});
+
+	(function() {
+		var bMap = new BMap.Map('bMap');
+		var point = new BMap.Point(116.404, 39.915);
+		bMap.centerAndZoom(point, 15);
+		bMap.disableDragging();
+		//bMap.enableScrollWheelZoom(false);
+		var marker = new BMap.Marker(point);
+		map.addOverlay(marker);
+		var infoWindow = new BMap.InfoWindow("地址：北京市东城区王府井大街88号乐天银泰百货八层", opts);  // 创建信息窗口对象 
+	})();
+	
 
 	function showPicture(index, callback) {
 		var srcStr = imgSrcList[index],

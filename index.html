@@ -1,90 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-    body {
-        background-color: black;
-    }
-    
-    li a:after {
-        content: "";
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        /* border: 1px solid #ccc;
-            border-width: 5px 5px 5px 0; */
-        border-top: 5px solid rgba(0, 0, 0, 0);
-        border-bottom: 5px solid rgba(208, 208, 208, 1);
-        border-right: 5px solid rgba(208, 208, 208, 1);
-        border-left: 5px solid rgba(0, 0, 0, 0);
-        left: 50%;
-        top: 100px;
-        -webkit-transform: rotate(45deg) translate(-50%, 0);
-        transform: rotate(45deg) translate(-50%, 0);
-        -webkit-animation: arrowGo 5s infinite steps(10, end);
-        animation: arrowGo 5s infinite steps(10, end);
-    }
-    
-    @-webkit-keyframes arrowGo {
-        0% {
-            opacity: 0.5;
-            -webkit-transform-origin: center center;
-            -webkit-transform: rotate(45deg) translate(-50%, 0)
-        }
-        100% {
-            opacity: 1;
-            -webkit-transform-origin: center center;
-            -webkit-transform: rotate(45deg) translate(-50%, 0) scale(2);
-            top: 280px
-        }
-    }
-    
-    @keyframes arrowGo {
-        0% {
-            opacity: 0.5;
-            transform-origin: center center;
-            transform: rotate(45deg) translate(-50%, 0)
-        }
-        100% {
-            opacity: 1;
-            transform-origin: center center;
-            transform: rotate(45deg) translate(-50%, 0) scale(2);
-            top: 280px;
-        }
-    }
-    
-    .flexcontainer {
-        display: -webkit-flex; 
-        display: flex;
-        -webkit-flex-direction: row;
-        flex-direction: row;
-        /* -webkit-align-items: flex-end;
-        align-items: flex-end; */
-         -webkit-justify-content: center;
-        justify-content: center; 
-        border: 1px solid red;
-        height: 600px;
-    }
-    
-    .flexcontainer div {
-        width: 100px;
-        height: 100px;
-        border: 1px solid white;
-    }
-    </style>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hello, World</title>
+<style type="text/css">
+html{height:100%}
+body{height:100%;margin:0px;padding:0px}
+#container{height:50%;width: 50%;margin: 0 auto;}
+ul {
+    height: 80%;
+}
+li {
+    height: 100%;
+}
+</style>
+<script type="text/javascript"
+src="http://api.map.baidu.com/api?v=1.4"></script>
 </head>
-
 <body>
-    <li><a href="#simple_intro">十分钟入门</a></li>
-    <div class="flexcontainer">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+<div style="height: 100%;" id="parent">
+<ul>
+    <li><div id="container"></div></li>
+</ul>
+<div id="abc">abc</div>
+    
+</div>
+<script type="text/javascript">
+    var map = new BMap.Map("container"); // 创建地图实例
+    var point = new BMap.Point(116.404, 39.915); // 创建点坐标
+    map.centerAndZoom(point, 15); // 初始化地图，设置中心点坐标和地图级别
+    map.addEventListener('touchstart', function(e) {
+        console.log(e.touches[0].clientX);
+    }, false);
+    var parent = document.getElementById('parent');
+    parent.addEventListener('touchstart', function(e) {
+        console.log('parent touchstart');
+    }, false);
+    document.addEventListener('touchstart', function() {
+        console.log('document touchstart');
+    });
+    map.addEventListener('touchmove', function(e) {
+        console.log('touchmove');
+        
+    }, false);
+     map.addEventListener('touchstart', function(e) {
+        console.log('touchstart');
+        
+    }, false);
+      map.addEventListener('touchend', function(e) {
+        console.log('touchend');
+        
+    }, false);
+    var abc = document.getElementById('abc');
+    parent.addEventListener('touchmove', function(e) {
+        console.log('parent touchmove');
+        abc.innerHTML = e.touches[0].clientX;
+    }, false);
+</script>
 </body>
-
 </html>
