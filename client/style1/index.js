@@ -117,8 +117,41 @@ $(function() {
 		bMap.disableDragging();
 		//bMap.enableScrollWheelZoom(false);
 		var marker = new BMap.Marker(point);
-		map.addOverlay(marker);
-		var infoWindow = new BMap.InfoWindow("地址：北京市东城区王府井大街88号乐天银泰百货八层", opts);  // 创建信息窗口对象 
+		bMap.addOverlay(marker);
+		var opts = {
+		  width : 200,     // 信息窗口宽度
+		  height: 100,     // 信息窗口高度
+		  title : "海底捞王府井店" , // 信息窗口标题
+		};
+		var infoWindow = new BMap.InfoWindow("地址：北京市东城区王府井大街88号乐天银泰百货八层", opts);  // 创建信息窗口对象
+		marker.addEventListener('click', function() {
+			bMap.openInfoWindow(infoWindow, point);
+		});
+		bMap.openInfoWindow(infoWindow, point);
+	})();
+
+	(function() {
+		var $blessBtn = $('#bless'),
+			$commentForm = $('#commentForm'),
+			$sendBtn = $('#send_btn'),
+			$textarea = $('#comment');
+		if($textarea.length > 0) {
+			addScroll($textarea[0]);
+		}
+		$blessBtn.on('touchend pointerup', function(e){
+			$commentForm.css({
+				left: 0
+			});
+		});
+		$sendBtn.tap(function() {
+			$commentForm.css({
+				left: '100%'
+			});
+		});
+		$commentForm.on('touchmove', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		},false);
 	})();
 	
 

@@ -35,7 +35,7 @@ function addScroll(div) {
 		style.opacity			= "0.45";
 		style.zIndex			= "9999999";
 		
-		style.borderRadius	= "10px";
+		style.borderRadius	= "3px";
 		
 	}
 	
@@ -47,9 +47,9 @@ function addScroll(div) {
 	var style = scrollbarX.style;
 	setupStyle(scrollbarX);
 	style.left			= "1px";
-	style.top			= (div.scrollTop+div.clientHeight-12) + "px";
+	style.top			= (div.scrollTop+div.clientHeight-5) + "px";
 	style.width			= "10px";
-	style.height		= "10px";
+	style.height		= "3px";
 	
 	
 	div.appendChild(scrollbarX);
@@ -60,9 +60,9 @@ function addScroll(div) {
 	var scrollbarY = document.createElement("div");
 	style = scrollbarY.style;
 	setupStyle(scrollbarY);
-	style.left			= (div.clientWidth-12) + "px";
+	style.left			= (div.clientWidth-5) + "px";
 	style.top			= "1px";
-	style.width			= "10px";
+	style.width			= "3px";
 	style.height		= "10px";
 	
 	
