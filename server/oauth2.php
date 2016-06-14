@@ -13,7 +13,6 @@ function getUserInfo($access_token, $openid) {
 }
 
 $accessTokenObj = json_decode(getAccessToken($_GET['code']), true);
-var_dump($accessTokenObj);
 if(!empty($accessTokenObj['access_token']) && !empty($accessTokenObj['openid'])) {
 	$userinfo = json_decode(getUserInfo($accessTokenObj['access_token'],$accessTokenObj['openid']), true);
 } else {
@@ -21,8 +20,8 @@ if(!empty($accessTokenObj['access_token']) && !empty($accessTokenObj['openid']))
 }
 
 if(!empty($userinfo['nickname']) && !empty($userinfo['headimgurl'])) {
-	$url = sprintf(FRONT_PAGE_URL.'?nickname=$s&headingurl=%s',$userinfo['nickname'],$userinfo['headimgurl']);
-	header('Location:'.FRONT_PAGE_URL.$url);
+	$url = sprintf(FRONT_PAGE_URL.'?nickname=%s&headimgurl=%s',$userinfo['nickname'],$userinfo['headimgurl']);
+	header('Location:'.$url);
 } else {
 	eixt('can note get userinfo');
 }

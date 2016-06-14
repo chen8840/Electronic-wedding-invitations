@@ -9,6 +9,11 @@ th, td { /* table elements 表格元素 */
 html, body {
 	height: 100%;
 }
+body {
+	display: relative;
+	overflow: hidden;
+
+}
 ul {
 	list-style: none;
 }
@@ -353,17 +358,13 @@ ul {
 	width: 90%;
 	box-sizing: border-box;
     margin: 10px auto 5px auto;
-    /* height: -webkit-calc(100% - 145px);
-    height: calc(100% - 145px); */
     border: 2px solid rgb(225,225,225);
 }
 .cover-picture-picture > div {
 	margin: 3px 5px;
-	/* height: -webkit-calc(100% - 6px);
-	height: calc(100% - 6px); */
 	background-position: center;
 	background-size: cover;
-	background-image: url(http://cestf.img47.wal8.com/img47/539947_20160316113107/145811197208.jpg);
+	/* background-image: url(http://cestf.img47.wal8.com/img47/539947_20160316113107/145811197208.jpg); */
 }
 .cover-picture-footer {
 	font-size: 18px;
@@ -405,9 +406,14 @@ ul {
 	float: left;
 }
 .clearfix:after {
-  content:'';
-  display: table;
-  clear: both;
+	content:'';
+	display: table;
+	clear: both;
+}
+#pic_page > div:after {
+	content:'';
+	display: table;
+	clear: both;
 }
 .clearfix {
   *zoom: 1; 
@@ -420,13 +426,25 @@ ul {
 	bottom: 0;
 	background-color: black;
 }
-#pictureCorridor img {
-	display: block;
+#pictureCorridor ul {
+	height: 100%;
+}
+#pictureCorridor ul li {
+	height: 100%;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 #comments_page, #pic_page, .scrolldiv {
 	height: 100%;
-	overflow: hidden;
-	position: relative;
+    overflow: hidden;
+    position: relative;
+}
+#bMap {
+	height: 50%;
+}
+.cover-picture-content.cover-picture-content-v1 {
+	padding: 16px 14px;
 }
 .address-panel {
 	width: 90%;
@@ -434,15 +452,6 @@ ul {
     box-sizing: border-box;
     padding: 20px 10px;
     margin: 0px auto;
-}
-#bMap {
-	height: 50%;
-	border: 1px solid grey;
-}
-.cover-picture-content.cover-picture-content-v1 {
-	padding: 16px 14px;
-}
-.address-panel {
 	display:-webkit-box;
 	display:-moz-box;
 	display:-ms-flexbox;
@@ -480,6 +489,9 @@ ul {
 #comments_page {
 	color: rgb(171,112,178);
 	line-height: 1.7;
+	box-sizing: border-box;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
 }
 #comments_page h1 {
 	text-align: center;
@@ -533,8 +545,8 @@ button {
 	top: 0;
 	bottom: 0;
 	background-color: red;
-	-webkit-transition: left .5s ease;
-  	transition: left .5s ease;
+	-webkit-transition: all .5s ease;
+  	transition: all .5s ease;
 }
 #commentForm .form {
 	padding: 20px;
@@ -545,4 +557,12 @@ button {
 }
 #commentForm button {
     margin-top: 20px;
+}
+#mask {
+	height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+    background-color: rgba(20,20,20,.8);
+    position: absolute;
 }

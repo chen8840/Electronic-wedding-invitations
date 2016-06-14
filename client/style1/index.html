@@ -7,15 +7,20 @@
 	<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
 	<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
-	<script src="lib/touch.js"></script>
-	<script src="lib/touchdiv.js"></script>
+	<script src="../lib/zepto_lib/touch.js"></script>
+	<script src="../lib/touchdiv.js"></script>
+	<script src="../lib/zepto_lib/callbacks.js"></script>
+	<script src="../lib/zepto_lib/deferred.js"></script>
+	<script src="../lib/spin.js"></script>
+	<script src="../bower_components/touch_div/build/touchDiv.js"></script>
+	<script src="../bower_components/mobile_silde/build/mobileSlide.js"></script>
 	<script src="index.js"></script>
 	<title>Document</title>
 </head>
 <body>
 	<div class="content">
 		<ul>
-			<li class="page">
+			<li class="page scrolldiv">
 				<div class="cover-picture-content">
 					<div>
 						<div class="cover-picture-up-border"></div>
@@ -46,22 +51,9 @@
 			</li>
 			<li class="page">
 				<div id="pic_page" class="clearfix scrolldiv">
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
-					<canvas></canvas>
 				</div>
 			</li>
-			<li class="page">
+			<li class="page scrolldiv">
 				<div class="cover-picture-content cover-picture-content-v1">
 					<div>
 						<div class="cover-picture-up-border"></div>
@@ -79,7 +71,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="page ">
+			<li class="page">
 				<div class="cover-picture-content cover-picture-content-v1">
 					<div>
 						<div class="cover-picture-up-border"></div>
@@ -96,6 +88,90 @@
 									<div class="comment">
 										分为人情味儿夫妻为哦了吕梁去哦额今日气温废弃物见咯权威而急脾气欧文
 										fasdfas
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="comment-line clearfix">
+								<div class="float-left">
+									<img src="resource/touxiang.jpg">
+								</div>
+								<div class="auto-right">
+									<div class="comment">
+										comment
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="comment-line clearfix">
+								<div class="float-left">
+									<img src="resource/touxiang.jpg">
+								</div>
+								<div class="auto-right">
+									<div class="comment">
+										comment
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="comment-line clearfix">
+								<div class="float-left">
+									<img src="resource/touxiang.jpg">
+								</div>
+								<div class="auto-right">
+									<div class="comment">
+										comment
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="comment-line clearfix">
+								<div class="float-left">
+									<img src="resource/touxiang.jpg">
+								</div>
+								<div class="auto-right">
+									<div class="comment">
+										comment
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="comment-line clearfix">
+								<div class="float-left">
+									<img src="resource/touxiang.jpg">
+								</div>
+								<div class="auto-right">
+									<div class="comment">
+										comment
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="comment-line clearfix">
+								<div class="float-left">
+									<img src="resource/touxiang.jpg">
+								</div>
+								<div class="auto-right">
+									<div class="comment">
+										comment
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="comment-line clearfix">
+								<div class="float-left">
+									<img src="resource/touxiang.jpg">
+								</div>
+								<div class="auto-right">
+									<div class="comment">
+										comment
 										
 									</div>
 									
@@ -130,7 +206,8 @@
 		<div></div>
 	</div>
 	<div id="pictureCorridor">
-		<img>
+		<ul>
+		</ul>	
 	</div>
 	<div id="commentForm">
 		<div class="cover-picture-content cover-picture-content-v1">
@@ -147,5 +224,6 @@
 		</div>
 	</div>
 	<div id="musicCtrl">&#9834;</audio></div>
+	<div id="mask"></div>
 </body>
 </html>
