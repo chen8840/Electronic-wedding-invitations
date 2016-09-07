@@ -1,7 +1,0 @@
-{
-  "name": "electronic_wedding_invitations",
-  "dependencies": {
-    "mobile_silde": "~1.0.4",
-    "touch_div": "~1.0.2"
-  }
-}
