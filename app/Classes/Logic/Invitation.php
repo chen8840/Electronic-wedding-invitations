@@ -291,6 +291,7 @@ class Invitation
      *   "hotel_room" : "xxx",
      *   "hotel_address" : "xxx",
      *   "hotel_phone" : "xxx",
+     *   "comments": []
      * }
      */
     public function getInfo()
@@ -308,6 +309,7 @@ class Invitation
         $output['hotel_address'] = $this->hotel_address;
         $output['hotel_phone'] = $this->hotel_phone;
         $output['music'] = $this->music;
+        $output['comments'] = $this->dbInstance->comments()->orderBy('created_at', 'desc')->get()->all();
         return $output;
     }
 
@@ -326,6 +328,11 @@ class Invitation
         } else {
             return \App\Invitation::where('state', $state)->count();
         }
+    }
+
+    public function addComment($name, $comment)
+    {
+        return $this->dbInstance->comments()->create(['name'=>$name,'comment'=>$comment]);
     }
 
     public function __get($property)

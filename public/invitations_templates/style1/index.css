@@ -563,3 +563,14 @@ button {
     background-color: rgba(20,20,20,.8);
     position: absolute;
 }
+.comment-line + .comment-line {
+	padding-top: 0;
+}
+.comment-line > div {
+	background-color: #DCFFF0;
+	border-radius: 5px;
+	padding: 3px 5px;
+}
+.comment-line > div > div:last-child {
+	padding-left: 1em;
+}

@@ -13,4 +13,9 @@ class Invitation extends Model
         'images' => 'array',
     ];
     protected $guarded = [];
+
+    public function comments()
+    {
+        return $this->hasMany('App\CustomComment');
+    }
 }

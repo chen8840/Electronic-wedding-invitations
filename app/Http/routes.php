@@ -50,3 +50,4 @@ Route::group(['middleware' => 'admin_auth'], function() {
 
 Route::get('invitationInfo/{invitationid}', 'CustomController@getInvitationInfo');
 Route::get('custom/getimage/{invitationid}/{filename}', 'CustomController@getImage');
+Route::get('custom/addcomment/{invitationId}', 'CustomController@addComment');

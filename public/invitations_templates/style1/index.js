@@ -13,7 +13,8 @@ $(function() {
 		});
 	};
 
-	var url = '../../../public/invitationInfo/' + getParam('id');
+	var baseUrl = '../../../public/';
+	var url = baseUrl + 'invitationInfo/' + getParam('id');
 	$.get(url, function(data) {
 		init(data);
 	});
@@ -25,6 +26,12 @@ $(function() {
 			ret = matches[1];
 		}
 		return ret;
+	}
+
+	function htmlEncode(value){
+		//create a in-memory div, set it's inner text(which jQuery automatically encodes)
+		//then grab the encoded contents back out.  The div never exists on the page.
+		return $('<div/>').text(value).html();
 	}
 
 	function init(jsonData) {
@@ -260,6 +267,22 @@ $(function() {
 				});
 			});
 			$sendBtn.on('touchend mousedown', function() {
+				var name = $('#custom_name').val(),
+					comment = $('#comment').val();
+				if(!name) {
+					$('#custom_name').addClass('error-input');
+					return;
+				}
+				if(!comment) {
+					$('#comment').addClass('errot-input');
+					return;
+				}
+				var url = baseUrl + 'custom/addcomment/' + getParam('id');
+				$.get(url, {
+					name: name,
+					comment: comment
+				});
+				prependComment({name: name, comment: comment});
 				$commentForm.css({
 					left: '100%'
 				});
@@ -268,6 +291,27 @@ $(function() {
 				e.preventDefault();
 				e.stopPropagation();
 			},false);
+
+			$.each(jsonData.comments, function(i, obj) {
+				appendComment(obj);
+			});
+			function appendComment(commentObj) {
+				$('#comments_panel').append(createCommentDiv(commentObj.name,commentObj.comment));
+			}
+			function prependComment(commentObj) {
+				$('#comments_panel').prepend(createCommentDiv(commentObj.name,commentObj.comment));
+			}
+			function createCommentDiv(name, comment) {
+				var template = 	'<div class="comment-line clearfix">' +
+									'<div>' +
+										'<div>[[name]]：</div>' +
+										'<div>[[comment]]</div>' +
+									'</div>' +
+								'</div>';
+				template = template.replace(/\[\[name\]\]/, htmlEncode(name));
+				template = template.replace(/\[\[comment\]\]/, htmlEncode(comment));
+				return $(template);
+			}
 		})();
 
 		function stopMusic() {

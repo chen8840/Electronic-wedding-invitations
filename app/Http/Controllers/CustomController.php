@@ -37,4 +37,13 @@ class CustomController extends Controller
             abort(404);
         }
     }
+
+    public function addComment($invitationId, Request $request)
+    {
+        $invitation = new Invitation($invitationId);
+        if(empty($request->input('name')) || empty($request->input('comment'))) {
+            throw new \Exception('argument is missed.');
+        }
+        $invitation->addComment($request->input('name'), $request->input('comment'));
+    }
 }
